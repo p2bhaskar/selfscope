@@ -183,7 +183,7 @@ import { useState } from "react";
 import SheetsPanel from "../components/SheetsPanel";
 
 export default function Settings({ data, showToast }) {
-  const { prefs, updatePrefs, journal, expenses, morning, goals } = data;
+ const { prefs, updatePrefs, journal, expenses, morning, goals, sheets } = data;
 
   const [form, setForm] = useState({ ...prefs });
   const [showClearConfirm, setShowClearConfirm] = useState(null);
