@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 
+
 export function useToast() {
   const [toast, setToast] = useState(null);
 
@@ -13,9 +14,11 @@ export function useToast() {
 
 export function Toast({ toast }) {
   if (!toast) return null;
+
   return (
     <div className={`toast ${toast.type === "error" ? "error" : ""}`}>
-      {toast.type === "success" ? "✓ " : "✕ "}{toast.message}
+      {toast.type === "success" ? "✓ " : "✕ "}
+      {toast.message}
     </div>
   );
 }
