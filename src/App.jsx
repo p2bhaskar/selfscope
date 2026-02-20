@@ -383,24 +383,25 @@ export default function App() {
         <Toast toast={toast} />
 
         {/* Mobile Bottom Nav */}
-        <nav className="bottom-nav">
-          {[
-            { id: "dashboard", icon: "⌂", label: "Home" },
-            { id: "journal",   icon: "✦", label: "Journal" },
-            { id: "expenses",  icon: "◈", label: "Expenses" },
-            { id: "goals",     icon: "◎", label: "Goals" },
-            { id: "settings",  icon: "⊙", label: "More" },
-          ].map((n) => (
-            <div
-              key={n.id}
-              className={`bottom-nav-item ${page === n.id ? "active" : ""}`}
-              onClick={() => setPage(n.id)}
-            >
-              <span className="bottom-nav-icon">{n.icon}</span>
-              <span className="bottom-nav-label">{n.label}</span>
-            </div>
-          ))}
-        </nav>
+        {/* Mobile Bottom Nav */}
+<nav className="bottom-nav">
+  {[
+    { id: "dashboard", icon: "⌂", label: "Home" },
+    { id: "journal",   icon: "✦", label: "Journal" },
+    { id: "expenses",  icon: "◈", label: "Expenses" },
+    { id: "goals",     icon: "◎", label: "Goals" },
+    { id: "settings",  icon: "⊙", label: "More" },
+  ].map((n) => (
+    <div
+      key={n.id}
+      className={`bottom-nav-item ${page === n.id ? "active" : ""}`}
+      onClick={() => setPage(n.id)}
+    >
+      <span className="bottom-nav-icon">{n.icon}</span>
+      <span className="bottom-nav-label">{n.label}</span>
+    </div>
+  ))}
+</nav>
       </div>
     </>
   );
