@@ -113,20 +113,19 @@ const pushAllToSheets = useCallback(async () => {
   try {
     await sheets.ensureSheetStructure();
 
-    const pushTab = async (tab, items) => {
-      // Clear data rows first
-      await sheets.deleteRow(tab, "A2:Z10000");
-      // Append all items one by one
+    const clearAndPush = async (tab, items) => {
+      // Clear using batchClear directly via fetchTab workaround
+      await sheets.apiBatchClear(tab);
       for (const item of items) {
         await sheets.appendRow(tab, item);
       }
       buildRowMap(tab, items);
     };
 
-    await pushTab(TABS.JOURNAL,  local.journal);
-    await pushTab(TABS.EXPENSES, local.expenses);
-    await pushTab(TABS.GOALS,    local.goals);
-    await pushTab(TABS.MORNING,  local.morning);
+    await clearAndPush(TABS.JOURNAL,  local.journal);
+    await clearAndPush(TABS.EXPENSES, local.expenses);
+    await clearAndPush(TABS.GOALS,    local.goals);
+    await clearAndPush(TABS.MORNING,  local.morning);
     await sheets.saveSettings(local.prefs);
     setLastSync(new Date());
   } finally {

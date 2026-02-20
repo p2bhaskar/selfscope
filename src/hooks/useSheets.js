@@ -241,6 +241,22 @@ export function useSheets() {
     }
   }, [apiFetch]);
 
+
+  const apiBatchClear = useCallback(async (tab) => {
+  setError(null);
+  try {
+    await apiFetch(
+      `${SHEETS_BASE}/${SPREADSHEET_ID}/values:batchClear`,
+      {
+        method: "POST",
+        body: JSON.stringify({ ranges: [`${tab}!A2:Z10000`] }),
+      }
+    );
+  } catch (err) {
+    console.warn(`Clear ${tab} failed:`, err.message);
+  }
+}, [apiFetch]);
+
   // ── batchFetchAll — parallel fetch of all data tabs ───────────────────────
   const batchFetchAll = useCallback(async () => {
     setIsLoading(true);
@@ -302,8 +318,10 @@ export function useSheets() {
     connect, disconnect, ensureSheetStructure,
     // Data ops
     fetchTab, appendRow, updateRow, deleteRow,
-    batchFetchAll, saveSettings, loadSettings,
+    batchFetchAll, saveSettings, loadSettings,apiBatchClear,
     // Tab constants (convenience)
     TABS,
   };
+
+ 
 }
