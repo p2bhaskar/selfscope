@@ -25,7 +25,7 @@ Error generating stack: `+a.message+`
     --dim: #3a4055;
   }
 
-  .app { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; overflow: hidden; }
+  .app { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; height: 100vh; width: 100vw; display: flex; overflow: hidden; } }
 
   .sidebar { width: 220px; min-width: 220px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 0; position: relative; z-index: 10; }
   .sidebar-logo { padding: 28px 24px 24px; border-bottom: 1px solid var(--border); }
@@ -44,7 +44,7 @@ Error generating stack: `+a.message+`
   .sync-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; cursor: pointer; letter-spacing: 1px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .sync-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201, 168, 76, 0.05); }
 
-  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
+  .main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
   .topbar { padding: 20px 36px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--surface); }
   .page-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--text); }
   .page-subtitle { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 2px; letter-spacing: 0.5px; }
