@@ -257,7 +257,7 @@
 
 // implementing PWA features in src/App-pwa.jsx, such as service worker registration for offline support and faster load times. The core app structure and syncing logic with Google Sheets remains the same as in src/App.jsx, ensuring a seamless user experience whether online or offline.
 
-// src/App.jsx — SelfScope Phase 3: Google Sheets sync
+
 import { useState } from "react";
 import { useSyncedData } from "./hooks/useSyncedData";
 import { useToast, Toast } from "./components/Toast";
