@@ -25,7 +25,7 @@ self.addEventListener("fetch", (e) => {
     caches.match(e.request).then((cached) => {
       if (cached) return cached;
       return fetch(e.request).then((response) => {
-        if (e.request.method === "GET" && response.status === 200) {
+         if (e.request.method === "GET" && response.status === 200 && url.protocol.startsWith("http")) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(e.request, clone));
         }
