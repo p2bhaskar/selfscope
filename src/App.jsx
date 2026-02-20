@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Journal from "./pages/Journal";
 import MorningLog from "./pages/MorningLog";
 import Expenses from "./pages/Expenses";
+
 import Goals from "./pages/Goals";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
