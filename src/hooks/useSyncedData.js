@@ -75,37 +75,64 @@ export function useSyncedData() {
     }
   }, [sheets, local]);
 
-  // ── Push all local data to Sheets (full overwrite) ─────────────────────────
-  const pushAllToSheets = useCallback(async () => {
-    setIsSyncing(true);
-    try {
-      await sheets.ensureSheetStructure();
-      // Push each tab sequentially
-      const pushTab = async (tab, items) => {
-        // Clear data rows first
-        await sheets.apiFetch?.(`https://sheets.googleapis.com/v4/spreadsheets/${import.meta.env.VITE_SPREADSHEET_ID}/values:batchClear`, {
-          method: "POST",
-          body: JSON.stringify({ ranges: [`${tab}!A2:Z10000`] }),
-        }).catch(() => {}); // ignore if clears fail
-        // Re-append all items
-        for (const item of items) {
-          await sheets.appendRow(tab, item);
-        }
-        buildRowMap(tab, items);
-      };
-      await Promise.all([
-        pushTab(TABS.JOURNAL,  local.journal),
-        pushTab(TABS.EXPENSES, local.expenses),
-        pushTab(TABS.GOALS,    local.goals),
-        pushTab(TABS.MORNING,  local.morning),
-      ]);
-      // Push settings
-      await sheets.saveSettings(local.prefs);
-      setLastSync(new Date());
-    } finally {
-      setIsSyncing(false);
-    }
-  }, [sheets, local]);
+//   // ── Push all local data to Sheets (full overwrite) ─────────────────────────
+//   const pushAllToSheets = useCallback(async () => {
+//     setIsSyncing(true);
+//     try {
+//       await sheets.ensureSheetStructure();
+//       // Push each tab sequentially
+//       const pushTab = async (tab, items) => {
+//         // Clear data rows first
+//         await sheets.apiFetch?.(`https://sheets.googleapis.com/v4/spreadsheets/${import.meta.env.VITE_SPREADSHEET_ID}/values:batchClear`, {
+//           method: "POST",
+//           body: JSON.stringify({ ranges: [`${tab}!A2:Z10000`] }),
+//         }).catch(() => {}); // ignore if clears fail
+//         // Re-append all items
+//         for (const item of items) {
+//           await sheets.appendRow(tab, item);
+//         }
+//         buildRowMap(tab, items);
+//       };
+//       await Promise.all([
+//         pushTab(TABS.JOURNAL,  local.journal),
+//         pushTab(TABS.EXPENSES, local.expenses),
+//         pushTab(TABS.GOALS,    local.goals),
+//         pushTab(TABS.MORNING,  local.morning),
+//       ]);
+//       // Push settings
+//       await sheets.saveSettings(local.prefs);
+//       setLastSync(new Date());
+//     } finally {
+//       setIsSyncing(false);
+//     }
+//   }, [sheets, local]);
+
+
+const pushAllToSheets = useCallback(async () => {
+  setIsSyncing(true);
+  try {
+    await sheets.ensureSheetStructure();
+
+    const pushTab = async (tab, items) => {
+      // Clear data rows first
+      await sheets.deleteRow(tab, "A2:Z10000");
+      // Append all items one by one
+      for (const item of items) {
+        await sheets.appendRow(tab, item);
+      }
+      buildRowMap(tab, items);
+    };
+
+    await pushTab(TABS.JOURNAL,  local.journal);
+    await pushTab(TABS.EXPENSES, local.expenses);
+    await pushTab(TABS.GOALS,    local.goals);
+    await pushTab(TABS.MORNING,  local.morning);
+    await sheets.saveSettings(local.prefs);
+    setLastSync(new Date());
+  } finally {
+    setIsSyncing(false);
+  }
+}, [sheets, local]);
 
   // ── Synced write helpers ───────────────────────────────────────────────────
   // Each returns the new item and silently pushes to Sheets if connected.
