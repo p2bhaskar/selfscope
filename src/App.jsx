@@ -1,4 +1,4 @@
-// src/App.jsx — SelfScope Phase 3: Google Sheets sync
+
 import { useState } from "react";
 import { useSyncedData } from "./hooks/useSyncedData";
 import { useToast, Toast } from "./components/Toast";
