@@ -189,6 +189,75 @@ export const style = `
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+
+
+  /* ── Mobile Responsive ────────────────────────────────── */
+  @media (max-width: 768px) {
+    .app { flex-direction: column; }
+
+    .sidebar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      width: 100%; min-width: unset; height: 60px;
+      flex-direction: row; border-right: none;
+      border-top: 1px solid var(--border);
+      padding: 0; z-index: 100;
+    }
+
+    .sidebar-logo, .sidebar-date,
+    .sidebar-footer, .nav-section-label { display: none; }
+
+    .sidebar-nav {
+      display: flex; flex-direction: row;
+      width: 100%; padding: 0;
+      justify-content: space-around; align-items: center;
+    }
+
+    .nav-item {
+      flex-direction: column; align-items: center;
+      gap: 3px; padding: 8px 4px;
+      border-left: none; border-top: 2px solid transparent;
+      font-size: 9px; min-width: 50px;
+      justify-content: center;
+    }
+
+    .nav-item.active {
+      border-left: none;
+      border-top-color: var(--gold);
+      background: rgba(201,168,76,0.07);
+    }
+
+    .nav-icon { font-size: 18px; width: auto; }
+
+    .main { padding-bottom: 60px; }
+
+    .topbar { padding: 12px 16px; }
+    .page-title { font-size: 20px; }
+    .page-subtitle { display: none; }
+    .topbar-actions .btn-ghost { display: none; }
+
+    .content { padding: 16px; }
+
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .stat-value { font-size: 26px; }
+
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .dashboard-row { grid-template-columns: 1fr; }
+    .analytics-grid { grid-template-columns: 1fr; }
+    .goals-full { grid-template-columns: 1fr; }
+
+    .journal-input-row { flex-direction: column; }
+    .modal { width: 95vw; padding: 20px; }
+    .card { padding: 14px; }
+    .tabs { overflow-x: auto; }
+    .tab { white-space: nowrap; }
+    .toast { bottom: 70px; right: 12px; left: 12px; text-align: center; }
+  }
+
+  @media (max-width: 400px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .nav-item { font-size: 8px; min-width: 40px; }
+  }
 `;
 
 
