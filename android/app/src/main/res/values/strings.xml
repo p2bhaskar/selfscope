@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SelfScope</string>
+    <string name="title_activity_main">SelfScope</string>
+    <string name="package_name">com.selfscope.app</string>
+    <string name="custom_url_scheme">com.selfscope.app</string>
+</resources>
